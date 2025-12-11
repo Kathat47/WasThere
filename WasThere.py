@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 
+from sys import path
+path.append("/media/kiro/154c85ac-9d56-4bea-8a21-20994f9ed585/myland/")
+path.append("/media/kiro/154c85ac-9d56-4bea-8a21-20994f9ed585/myland/lib/python3.13/site-packages")
+
 from playwright.sync_api import sync_playwright
 from pyfiglet import figlet_format
 from termcolor import colored
 from random import randint
 from string import ascii_letters, digits
+from time import sleep
 from rich.console import Console
 from sys import exit
 from datetime import datetime
@@ -48,6 +53,8 @@ initx.add_argument("-f", "--files", nargs='+', default=False, help="Files of Url
 
 initx.add_argument("-d", "--destination", type=str, default=getcwd()+'/', help="Snapshot Saving Destination .")
 
+initx.add_argument("-s", "--sleep", type=float, default=5.0, help="Sleep Between Every Request .")
+
 parseit = initx.parse_args()
 
 urls = parseit.urls
@@ -55,6 +62,8 @@ urls = parseit.urls
 files = parseit.files
 
 dest = parseit.destination
+
+sleep_time = parseit.sleep
 
 if dest[-1] != '/' :
 
@@ -100,7 +109,7 @@ else :
 
 # Info
 
-info = (f"Current Date : {str(datetime.now()).replace(':', '/')}", f"Urls-Resources : {len(resources)}", f"ScreenShot-Dest : {dest}")
+info = (f"Current Date : {str(datetime.now()).replace(':', '/')}", f"Urls-Resources : {len(resources)}", f"ScreenShot-Dest : {dest}", f"Sleep-Time : {sleep_time:.1f} Sec")
 
 for poi in info :
 
@@ -111,6 +120,8 @@ for poi in info :
 print('\n')
 
 # Info
+
+passed = 0
 
 with sync_playwright() as spoint :
 
@@ -143,6 +154,20 @@ with sync_playwright() as spoint :
         except Exception as Error :
 
             print(f"{colored('(-)', on_color='on_red')} : {colored(str(Error).strip(), 'red')}")
+
+        if len(resources) > 1 :
+
+
+
+            passed += 1
+
+            print(colored(f"(*) Passed= {passed}, Remain= {len(resources)-passed}", "yellow"))
+
+            if passed != len(resources) - 1 :
+
+                print(colored(f"(*) Sleeping For {sleep_time:.1f} Second", "magenta"))
+
+                sleep(sleep_time)
 
         print('\n')
 
