@@ -157,8 +157,6 @@ with sync_playwright() as spoint :
 
         if len(resources) > 1 :
 
-
-
             passed += 1
 
             print(colored(f"(*) Passed= {passed}, Remain= {len(resources)-passed}", "yellow"))
