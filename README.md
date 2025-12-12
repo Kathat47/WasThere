@@ -35,7 +35,9 @@ Medium : https://medium.com/@kathat
 GitHub : https://github.com/Kathat47
 
 usage: Take Snapshots of Websites in Your Terminal  [-h] [-u URLS [URLS ...]]
-                                                             [-f FILES [FILES ...]] [-d DESTINATION]
+                                                             [-f FILES [FILES ...]]
+                                                             [-d DESTINATION]
+                                                             [-s SLEEP]
 
 options:
   -h, --help            show this help message and exit
@@ -45,6 +47,7 @@ options:
                         Files of Urls To Take Snapshots From .
   -d, --destination DESTINATION
                         Snapshot Saving Destination .
+  -s, --sleep SLEEP     Sleep Between Every Request .
 ```
 
 ### Explaining Arguments :
