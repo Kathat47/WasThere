@@ -161,7 +161,7 @@ with sync_playwright() as spoint :
 
             print(colored(f"(*) Passed= {passed}, Remain= {len(resources)-passed}", "yellow"))
 
-            if passed != len(resources) - 1 :
+            if passed != len(resources) :
 
                 print(colored(f"(*) Sleeping For {sleep_time:.1f} Second", "magenta"))
 
